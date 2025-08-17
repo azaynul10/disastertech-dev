@@ -469,5 +469,58 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+      const API_BASE =
+        "https://9l5b7yhwsk.execute-api.us-east-1.amazonaws.com/Prod";
+
+      // Fetch and display GitHub commits in #intro
+      async function fetchCommits() {
+        try {
+          const response = await fetch(`${API_BASE}/github`);
+          if (!response.ok) throw new Error("Fetch failed");
+          const data = await response.json();
+          const commitsSection = document.createElement("div");
+          commitsSection.innerHTML =
+            "<h3>Recent Project Updates (from GitHub)</h3><ul></ul>";
+          const ul = commitsSection.querySelector("ul");
+          data.commits.forEach((commit) => {
+            const li = document.createElement("li");
+            li.textContent = commit;
+            ul.appendChild(li);
+          });
+          // Append to #intro (wait for template JS to load sections if needed)
+          const intro = document.querySelector("#intro");
+          if (intro) intro.appendChild(commitsSection);
+          else console.warn("#intro not found - adjust selector");
+        } catch (error) {
+          console.error("Error fetching commits:", error);
+        }
+      }
+
+      // Log visitor on load
+      async function logVisitor() {
+        try {
+          const payload = {
+            timestamp: new Date().toISOString(),
+            user_agent: navigator.userAgent,
+            page: window.location.pathname,
+          };
+          const response = await fetch(`${API_BASE}/analytics`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!response.ok) throw new Error("Log failed");
+        } catch (error) {
+          console.error("Error logging visit:", error);
+        }
+      }
+
+      // Execute on DOM ready (after template loads)
+      document.addEventListener("DOMContentLoaded", () => {
+        fetchCommits();
+        logVisitor();
+      });
+    </script>
   </body>
 </html>

@@ -1,0 +1,44 @@
+# .gitignore for DisasterTech project
+# Ignore Python cache and environment files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+ENV/
+.venv/
+
+# Ignore AWS SAM build artifacts
+.aws-sam/
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore API keys and secrets
+*.env
+*.secret
+*.key
+*.pem
+*.json
+
+# Ignore history files
+.history
+*.history
+
+# Ignore node_modules if any
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore test output
+coverage/
+
+# Ignore other common files
+*.bak
+*.swp
