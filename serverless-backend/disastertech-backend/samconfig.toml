@@ -19,6 +19,7 @@ resolve_s3 = true
 s3_prefix = "disastertech-backend"
 region = "us-east-1"
 image_repositories = []
+parameter_overrides = "SesFromAddress=\"azaynul3@gmail.com\" SesToAddress=\"azaynul3@gmail.com\""
 
 [default.package.parameters]
 resolve_s3 = true

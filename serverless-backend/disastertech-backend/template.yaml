@@ -2,10 +2,16 @@ AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: DisasterTech Backend
 
+Parameters:
+  RecaptchaSecret:
+    Type: String
+    NoEcho: true
+    Description: "reCAPTCHA secret key"
+
 Globals:
   Function:
     Timeout: 30
-    Runtime: python3.13
+    Runtime: python3.10
 
 Resources:
   VisitorTable:
@@ -65,6 +71,28 @@ Resources:
             RestApiId: !Ref ApiGateway
             Path: /analytics
             Method: options
+
+  ContactHandlerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: contact-handler/
+      Handler: app.handler
+      Runtime: python3.10
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - AmazonSESFullAccess
+      Environment:
+        Variables:
+          RECAPTCHA_SECRET: !Ref RecaptchaSecret
+          FROM_EMAIL: "azaynul3@gmail.com"
+          SES_TO_ADDRESS: "azaynul3@gmail.com"
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /contact
+            Method: post
 
   ApiGateway:
     Type: AWS::Serverless::Api

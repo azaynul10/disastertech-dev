@@ -2332,3 +2332,215 @@ body.is-preload #footer {
     flex-direction: column;
   }
 }
+
+/* Social Media Links */
+.social-links {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.social-links h3 {
+  color: #00cc66;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.social-links .icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-links .icons li {
+  margin: 0;
+}
+
+.social-links .icons a {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-links .icons a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #00cc66;
+  color: #00cc66;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 204, 102, 0.3);
+}
+
+/* Contact Form Enhancements - August 2025 Trends: Minimalism, Dark Mode, Micro-Animations, Accessibility */
+
+/* Overall Form - Minimalism with Bento-Grid Inspiration (clean, compartmentalized fields) */
+#contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* White space for breathability */
+  max-width: 600px; /* Center and limit width to prevent stretch on wide screens */
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Subtle blur-like depth for dark mode */
+  border-radius: 16px; /* Rounded for modern, soft feel */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle elevation */
+  overflow: visible; /* Allow content to be visible */
+  box-sizing: border-box;
+  width: 100%; /* Ensure form takes full available width */
+}
+
+/* Fields - High Contrast, Accessibility */
+#contact .fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1; /* Take available space but allow room for buttons */
+}
+
+#contact .field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#contact label {
+  font-weight: bold;
+  color: #fff; /* High contrast on dark bg */
+  margin-bottom: 0.5rem;
+  text-transform: uppercase; /* Bold typography trend */
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+#contact input,
+#contact textarea {
+  background: rgba(0, 0, 0, 0.3); /* Muted dark mode for low light comfort */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  color: #fff;
+  transition: all 0.3s ease; /* Smooth micro-animation */
+}
+
+/* Focus State - Animations & Accessibility (glow, expand for engagement) */
+#contact input:focus,
+#contact textarea:focus {
+  border-color: #00cc66; /* Success green glow */
+  box-shadow: 0 0 10px rgba(0, 204, 102, 0.5); /* Subtle animation trend */
+  outline: none; /* Accessible focus without default ring */
+  transform: scale(1.02); /* Slight expand for kinetic feel */
+}
+
+/* Textarea Specific - Clearer & Engaging (prevent "getting out", placeholder animation) */
+#contact textarea {
+  resize: vertical; /* Allow vertical resize only to prevent horizontal overflow */
+  min-height: 60px;
+  max-height: 150px; /* Much smaller limit to prevent overflow */
+  width: calc(100% - 2px); /* Account for border width */
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.75rem; /* Smaller padding */
+  max-width: calc(100% - 2px); /* Ensure it doesn't exceed container width */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin: 0; /* Remove any default margins */
+}
+
+#contact textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6); /* Muted for clarity */
+  transition: opacity 0.3s ease; /* Kinetic typography-inspired fade */
+}
+
+#contact textarea:focus::placeholder {
+  opacity: 0; /* Fade out on focus for clean input */
+}
+
+/* Buttons - Microinteractions */
+#contact .actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  width: 100%;
+  flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+#contact .actions input {
+  background: #00cc66;
+  color: #1a1f2e;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  line-height: 1;
+}
+
+#contact .actions input:hover {
+  background: #00ff88; /* Brighter on hover for animation */
+  transform: translateY(-2px); /* Lift effect */
+}
+
+#contact .actions input[type="reset"] {
+  background: #ff4d4d; /* Reset in red for alert */
+}
+
+#contact .actions input[type="reset"]:hover {
+  background: #ff6666;
+}
+
+/* Response Message - Personalization & Accessibility */
+#form-response {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #00cc66; /* Success color */
+  aria-live: "polite"; /* Screen reader announces changes */
+}
+
+/* Mobile Responsive - Trends for Accessibility/Personalization */
+@media (max-width: 768px) {
+  #contact form {
+    padding: 1rem;
+    gap: 1rem;
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+  #contact textarea {
+    min-height: 80px; /* Adapt for smaller screens */
+    max-width: 100%;
+  }
+  #contact .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  #contact .actions input {
+    width: 100%;
+    max-width: 200px;
+  }
+}
