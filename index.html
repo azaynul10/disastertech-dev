@@ -45,6 +45,7 @@
             <li><a href="#intro">Intro</a></li>
             <li><a href="#work">Work</a></li>
             <li><a href="#about">About</a></li>
+            <li><a href="#simulator" class="scrolly">Simulator</a></li>
             <li><a href="#contact">Contact</a></li>
             <!--<li><a href="#elements">Elements</a></li>-->
           </ul>
@@ -284,6 +285,34 @@
           </div>
         </article>
 
+        <!-- Disaster Response Simulator -->
+        <article id="simulator">
+          <h2 class="major">Disaster Response Simulator</h2>
+          <p>
+            Simulate a disaster event and see tech coordination in action. Click
+            "Start Simulation" to begin.
+          </p>
+          <canvas id="sim-canvas" width="800" height="400"></canvas>
+          <div class="education-info">
+            <h3>How It Works</h3>
+            <p>
+              This simulator demonstrates real-time coordination using
+              AWS—Lambda for alerts, DynamoDB for data. Learn more in timeline!
+            </p>
+          </div>
+          <!-- Map/simulation area -->
+          <div id="sim-controls">
+            <button id="start-sim">Start Simulation</button>
+            <button id="reset-sim">Reset</button>
+            <div id="sim-stats">
+              <p>Success Rate: <span id="success-rate">0%</span></p>
+              <p>Areas Coordinated: <span id="areas-count">0</span></p>
+            </div>
+          </div>
+          <div id="sim-log"></div>
+          <!-- Simulation messages -->
+        </article>
+
         <!-- Contact -->
         <article id="contact">
           <h2 class="major">Contact</h2>
@@ -364,6 +393,23 @@
             </ul>
           </form>
           <div id="form-response" aria-live="polite"></div>
+          <p class="recaptcha-notice">
+            This site is protected by reCAPTCHA and the Google
+            <a
+              href="https://policies.google.com/privacy"
+              target="_blank"
+              rel="noopener"
+              >Privacy Policy</a
+            >
+            and
+            <a
+              href="https://policies.google.com/terms"
+              target="_blank"
+              rel="noopener"
+              >Terms of Service</a
+            >
+            apply.
+          </p>
         </article>
 
         <!-- Elements -->
@@ -745,6 +791,22 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
         // Contact form submission with reCAPTCHA v3
         const form = document.getElementById("contact-form");
+        const responseDiv = document.getElementById("form-response");
+        const resetContactUI = () => {
+          if (responseDiv) responseDiv.innerHTML = "";
+        };
+        // Clear status on load, when navigating back to #contact, or user interaction
+        resetContactUI();
+        window.addEventListener("hashchange", () => {
+          if (location.hash === "#contact") {
+            resetContactUI();
+            form?.reset();
+          }
+        });
+        ["name", "email", "message"].forEach((id) =>
+          document.getElementById(id)?.addEventListener("input", resetContactUI)
+        );
+        form?.addEventListener("reset", resetContactUI);
         if (form && window.grecaptcha) {
           form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -775,18 +837,17 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
                     );
 
                     const result = await response.json();
-                    const responseDiv =
-                      document.getElementById("form-response");
 
                     if (response.ok) {
-                      responseDiv.textContent = "Message sent successfully!";
-                      responseDiv.style.color = "#00cc66";
+                      responseDiv.innerHTML =
+                        '<p style="color: #00cc66;">Message sent!</p>';
                       form.reset();
+                      setTimeout(resetContactUI, 4000);
                     } else {
-                      responseDiv.textContent =
-                        "Failed to send message: " +
-                        (result.error || "Unknown error");
-                      responseDiv.style.color = "#ff4d4d";
+                      responseDiv.innerHTML =
+                        '<p style="color: #ff4d4d;">Failed: ' +
+                        (result.error || "Unknown error") +
+                        "</p>";
                     }
                   } catch (error) {
                     document.getElementById("form-response").textContent =
@@ -813,5 +874,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Dashboard Scripts -->
     <script src="assets/js/dashboard.js"></script>
+    <!-- Simulator Scripts -->
+    <script src="assets/js/simulator.js"></script>
   </body>
 </html>

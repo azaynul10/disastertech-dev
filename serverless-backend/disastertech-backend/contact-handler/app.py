@@ -3,6 +3,7 @@ import os
 import urllib.parse
 import urllib.request
 import boto3
+import traceback
 
 SES = boto3.client("ses")
 
@@ -41,18 +42,25 @@ def verify_recaptcha(token: str, remote_ip: str | None = None) -> dict:
 
 
 def handler(event, context):
+	# Debug: log full incoming event (may include headers/context)
+	try:
+		print("Event received:", json.dumps(event))
+	except Exception:
+		print("Event received (non-serializable)")
 	if event.get("httpMethod") == "OPTIONS":
 		return _resp(200, {"ok": True})
 
 	try:
 		body = json.loads(event.get("body") or "{}")
 	except Exception:
+		print("Invalid JSON body:", event.get("body"))
 		return _resp(400, {"error": "Invalid JSON"})
 
 	name = (body.get("name") or "").strip()
 	email = (body.get("email") or "").strip()
 	message = (body.get("message") or "").strip()
 	token = body.get("recaptcha_token") or body.get("token") or body.get("g-recaptcha-response")
+	print("Parsed body:", json.dumps({"name": name, "email": email, "has_message": bool(message), "has_token": bool(token)}))
 	if not all([name, email, message, token]):
 		return _resp(400, {"error": "Missing required fields"})
 
@@ -65,10 +73,13 @@ def handler(event, context):
 	# Verify reCAPTCHA v3/enterprise
 	try:
 		verification = verify_recaptcha(token, remote_ip)
+		print("reCAPTCHA verification result:", json.dumps(verification))
 	except Exception as e:
+		print("reCAPTCHA verification exception:\n", traceback.format_exc())
 		return _resp(502, {"error": "recaptcha verification failed", "details": str(e)})
 
 	if not verification.get("success"):
+		print("reCAPTCHA failed:", json.dumps(verification))
 		return _resp(403, {"error": "recaptcha failed", "verification": verification})
 
 	# Optional scoring check for v3
@@ -80,6 +91,7 @@ def handler(event, context):
 	to_email = os.environ.get("TO_EMAIL") or os.environ.get("SES_TO_ADDRESS") or from_email
 	if not from_email:
 		return _resp(500, {"error": "FROM_EMAIL not configured"})
+	print("Preparing SES send", json.dumps({"from": from_email, "to": to_email}))
 
 	subject = "New Contact Form Submission"
 	text_body = (
@@ -107,6 +119,8 @@ def handler(event, context):
 			},
 		)
 	except Exception as e:
+		print("SES send exception:\n", traceback.format_exc())
 		return _resp(502, {"error": "ses send failed", "details": str(e)})
 
+	print("SES send successful")
 	return _resp(200, {"ok": True}) 
