@@ -1,6 +1,3 @@
-@import url(fontawesome-all.min.css);
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
-
 /*
 	Dimension by HTML5 UP
 	html5up.net | @ajlkn
@@ -826,6 +823,24 @@ input[type="radio"] + label:before {
   width: 100%;
 }
 
+/* Image Optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.image.main img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Reserve space to reduce CLS for hero images */
+.image.main img {
+  aspect-ratio: 16 / 9;
+}
+
 @media screen and (max-width: 736px) {
   .image.main {
     margin: 2rem 0;
@@ -1420,8 +1435,21 @@ body.is-preload #bg:before {
   border-radius: 100%;
 }
 
-#header .logo .icon:before {
-  font-size: 2rem;
+#header .logo img {
+  width: 2rem;
+  height: 2rem;
+  filter: brightness(0) saturate(100%) invert(84%) sepia(100%) saturate(1000%)
+    hue-rotate(120deg) brightness(1.2);
+  animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 #header .content {
@@ -1457,7 +1485,7 @@ body.is-preload #bg:before {
 #header .content p {
   text-transform: uppercase;
   letter-spacing: 0.2rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
   line-height: 2;
 }
 
@@ -1490,7 +1518,7 @@ body.is-preload #bg:before {
   padding: 0 1.25rem 0 1.45rem;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
   border-bottom: 0;
 }
 
@@ -1568,8 +1596,9 @@ body.is-preload #header .content .inner {
     line-height: 4.75rem;
   }
 
-  #header .logo .icon:before {
-    font-size: 1.75rem;
+  #header .logo img {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 
   #header .content .inner {
@@ -1758,7 +1787,7 @@ body.is-preload #header .content .inner {
 
 #footer .copyright {
   letter-spacing: 0.2rem;
-  font-size: 0.6rem;
+  font-size: 0.9rem;
   opacity: 0.75;
   margin-bottom: 0;
   text-transform: uppercase;
@@ -2570,9 +2599,10 @@ body.is-preload #footer {
   display: block;
   box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);
   width: 100%; /* Fit inside article */
-  max-width: 800px; /* Don’t exceed intended size */
+  max-width: 800px; /* Don't exceed intended size */
   height: auto; /* Keep aspect ratio */
   box-sizing: border-box; /* Include border in width calc */
+  will-change: transform; /* performance hint for animations */
 }
 
 #sim-controls {
@@ -2614,6 +2644,212 @@ body.is-preload #footer {
   color: #00cc66;
 }
 
+/* About Banner Styling */
+#about .banner {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+#about .banner img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  aspect-ratio: 2/1;
+  object-fit: cover;
+}
+
+#about .banner-text {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#about .banner-text button {
+  background: #00cc66;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  color: #1a1f2e;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+#about .banner-text button:hover {
+  background: #00ff88;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 204, 102, 0.4);
+}
+
+/* Header Customization - 2025 Trends: Immersive Interactivity, Dark Mode Gradients, Micro-Animations, Bold Hierarchy */
+#header {
+  background-image: url("../../images/world-map.svg");
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  animation: fadeInHeader 1.8s ease-out;
+  filter: contrast(1.05) brightness(1.1);
+}
+
+@keyframes fadeInHeader {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#header h1 {
+  color: #fff;
+  font-size: 3.5rem;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  animation: slideIn 1s ease-out;
+  /* 2025 Modern Typography Effects */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: slideIn 1s ease-out, gradientShift 4s ease infinite;
+  will-change: transform, background-position;
+}
+
+#header h1:hover {
+  transform: scale(1.05);
+}
+
+#header p {
+  color: #ddd;
+  font-size: 1.3rem;
+  max-width: 850px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.7;
+  transition: opacity 0.3s ease;
+  animation: fadeIn 1.5s ease-in;
+}
+
+#header p:hover {
+  opacity: 0.9;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1.2rem 2.5rem;
+  background: linear-gradient(135deg, #00cc66 0%, #00ff88 100%);
+  color: #1a1f2e;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 204, 102, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.cta-button:hover {
+  background: linear-gradient(135deg, #ff4d4d 0%, #ff6b6b 100%);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 77, 77, 0.5);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cta-button:hover:before {
+  left: 100%;
+}
+
+/* Responsiveness for all devices - Essential for 2025 (60-70% mobile) */
+@media (max-width: 1024px) {
+  #header {
+    padding: 4rem 1.5rem;
+  }
+  #header h1 {
+    font-size: 3rem;
+  }
+  #header p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #header {
+    padding: 3rem 1rem;
+  }
+  #header h1 {
+    font-size: 2.5rem;
+  }
+  #header p {
+    font-size: 1rem;
+    max-width: 90%;
+  }
+  .cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #header h1 {
+    font-size: 2rem;
+  }
+  #header p {
+    font-size: 0.9rem;
+  }
+}
+
 #sim-log {
   margin-top: 1rem;
   color: #fff;
@@ -2636,4 +2872,122 @@ body.is-preload #footer {
 }
 .education-info h3 {
   color: #00cc66;
+}
+
+/* Stabilize header to reduce CLS */
+#header .content .inner {
+  min-height: 240px;
+}
+#header nav ul {
+  min-height: 44px;
+}
+
+/* Prevent layout shifts from hidden elements */
+#main {
+  min-height: 400px; /* Reserve space to prevent shifts */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#main.active {
+  opacity: 1;
+}
+
+/* Optimize animations for GPU acceleration */
+.metric-item {
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU layer */
+}
+
+.timeline-line {
+  will-change: height;
+  transform: translateZ(0);
+}
+
+/* Optimize header animations */
+#header {
+  will-change: transform, filter, opacity;
+  transform: translateZ(0);
+}
+
+/* Optimize background animations */
+#bg::before,
+#bg::after {
+  will-change: background-color, transform, filter;
+  transform: translateZ(0);
+}
+
+/* Optimize inner content animations */
+#header .content .inner {
+  will-change: max-height, padding, opacity;
+  transform: translateZ(0);
+}
+
+/* Enhanced Typed.js Styling */
+#typed-header {
+  display: inline-block;
+  position: relative;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* Typed.js cursor styling */
+.typed-cursor {
+  color: #00cc66 !important;
+  font-weight: 700;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Kinetic effect after typing completes */
+.typing-complete {
+  animation: kineticFloat 3s ease-in-out infinite;
+}
+
+@keyframes kineticFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(0.5deg); }
+  75% { transform: translateY(2px) rotate(-0.5deg); }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Accessibility: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  #header h1 {
+    animation: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .typing-complete {
+    animation: none;
+  }
+  
+  .typed-cursor {
+    animation: none;
+    opacity: 1;
+  }
+  
+  .slide-in-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  /* Disable all animations for accessibility */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

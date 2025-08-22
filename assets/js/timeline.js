@@ -111,11 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     update();
   }
 
-  // Smooth scroll to timeline on load or nav click (optional enhancement)
-  const workSection = document.getElementById("work");
-  if (workSection) {
-    workSection.scrollIntoView({ behavior: "smooth" }); // Example: Auto-scroll to timeline
-  }
+  // Note: avoid auto-scrolling on load to prevent unexpected layout shifts
 
   // Error handling: Log if data import fails
   if (timelineMilestones.length === 0) {

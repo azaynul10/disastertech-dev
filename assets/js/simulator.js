@@ -1,5 +1,5 @@
 // Disaster Response Simulator – enhanced interactions
-document.addEventListener("DOMContentLoaded", () => {
+function initSimulator() {
   const canvas = document.getElementById("sim-canvas");
   if (!canvas) return; // Simulator section may not be on this page yet
 
@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let simulationInterval = null;
   let areas = [];
   const disasterTypes = ["Earthquake", "Flood", "Wildfire", "Hurricane"];
+  const ALERT_RADIUS = 15;
 
   // Ensure the canvas backing store matches CSS size
   function resizeCanvas() {
@@ -53,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function drawAlert(x, y, color) {
     ctx.beginPath();
-    ctx.arc(x, y, 15, 0, Math.PI * 2);
+    ctx.arc(x, y, ALERT_RADIUS, 0, Math.PI * 2);
     ctx.fillStyle = color || "#ff4d4d";
     ctx.fill();
     ctx.shadowColor = color || "#ff4d4d";
@@ -71,14 +72,15 @@ document.addEventListener("DOMContentLoaded", () => {
     areasSpan.textContent = "0";
     successSpan.textContent = "0%";
 
+    const r = ALERT_RADIUS;
     simulationInterval = setInterval(() => {
       if (count < maxAreas) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
+        const x = r + Math.random() * (canvas.width - 2 * r);
+        const y = r + Math.random() * (canvas.height - 2 * r);
         const type =
           disasterTypes[Math.floor(Math.random() * disasterTypes.length)];
         const success = (90 + Math.random() * 9).toFixed(1); // 90-99%
-        const point = { x, y, color: "#00cc66", type, success };
+        const point = { x, y, color: "#ff4d4d", type, success };
         areas.push(point);
         drawAlert(x, y, point.color);
         logDiv.innerHTML += `${type} in Area ${
@@ -106,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const y = e.clientY - rect.top;
     let hovered = false;
     for (let i = 0; i < areas.length; i++) {
-      if (Math.hypot(x - areas[i].x, y - areas[i].y) < 15) {
+      if (Math.hypot(x - areas[i].x, y - areas[i].y) < ALERT_RADIUS) {
         canvas.title = `${areas[i].type} | Success: ${areas[i].success}%`;
         hovered = true;
         break;
@@ -148,4 +150,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial draw
   drawMap();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initSimulator);
+} else {
+  initSimulator();
+}

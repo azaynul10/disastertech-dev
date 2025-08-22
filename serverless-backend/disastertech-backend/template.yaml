@@ -93,6 +93,12 @@ Resources:
             RestApiId: !Ref ApiGateway
             Path: /contact
             Method: post
+        ApiOptions:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /contact
+            Method: options
 
   ApiGateway:
     Type: AWS::Serverless::Api

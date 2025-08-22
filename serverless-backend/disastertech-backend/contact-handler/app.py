@@ -107,6 +107,7 @@ def handler(event, context):
 	"""
 
 	try:
+		print(f"Attempting SES send from {from_email} to {to_email}")
 		SES.send_email(
 			Source=from_email,
 			Destination={"ToAddresses": [to_email]},
@@ -119,8 +120,20 @@ def handler(event, context):
 			},
 		)
 	except Exception as e:
+		error_msg = str(e)
+		print(f"SES error: {error_msg}")
 		print("SES send exception:\n", traceback.format_exc())
-		return _resp(502, {"error": "ses send failed", "details": str(e)})
+		print(str(e))  # Additional error logging
+		
+		# Check for common SES issues
+		if "not verified" in error_msg.lower():
+			return _resp(502, {"error": "Email address not verified in SES. Please verify the sender email in AWS SES console."})
+		elif "sandbox" in error_msg.lower():
+			return _resp(502, {"error": "SES is in sandbox mode. Please request production access or verify recipient email."})
+		elif "quota" in error_msg.lower():
+			return _resp(502, {"error": "SES sending quota exceeded. Please check your AWS SES limits."})
+		else:
+			return _resp(502, {"error": "ses send failed", "details": error_msg})
 
 	print("SES send successful")
 	return _resp(200, {"ok": True}) 
