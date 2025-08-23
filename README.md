@@ -1,6 +1,6 @@
 # DisasterTech.dev - Humanitarian Tech Hub with AWS
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-00cc66?style=for-the-badge )](https://d23n14ul3xobxo.cloudfront.net/ )
-[![AWS Builder Challenge](https://img.shields.io/badge/🏆_AWS_Builder-Challenge_2025-ff4d4d?style=for-the-badge )](https://builder.aws.com/content/31C2WxIDSQive7q2Dv5xNFCmYJj/aws-builder-challenge-2-build-a-website-on-the-cloud)
+[![AWS Builder Challenge](https://img.shields.io/badge/🏆_AWS_Builder-Challenge_2025-ff4d4d?style=for-the-badge )](https://builder.aws.com/content/31eebSvkBbU2x3IAMKbQeYymygX/building-disastertechdev-aws-powered-humanitarian-hero)
 [![YouTube Demo](https://img.shields.io/badge/📺_YouTube-Demo_Video-red?style=for-the-badge )](https://youtu.be/-fjJp_qWs9g)
 ![Header Screenshot](images/header-screenshot.PNG)
 Live: https://d23n14ul3xobxo.cloudfront.net
