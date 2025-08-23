@@ -1,13 +1,31 @@
 # DisasterTech.dev - Humanitarian Tech Hub with AWS
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Visit_Site-00cc66?style=for-the-badge )](https://d23n14ul3xobxo.cloudfront.net/ )
-[![AWS Builder Challenge](https://img.shields.io/badge/🏆_AWS_Builder-Challenge_2025-ff4d4d?style=for-the-badge )](https://builder.aws.com/content/31eebSvkBbU2x3IAMKbQeYymygX/building-disastertechdev-aws-powered-humanitarian-hero)
-[![YouTube Demo](https://img.shields.io/badge/📺_YouTube-Demo_Video-red?style=for-the-badge )](https://youtu.be/-fjJp_qWs9g)
-![Header Screenshot](images/header-screenshot.PNG)
+
+![Header Screenshot](images/header-screenshot.png)
 Live: https://d23n14ul3xobxo.cloudfront.net
 
 ## Overview
 
 DisasterTech.dev is a showcase for humanitarian tech innovation, built in 7 days for the AWS Builder Challenge. From foundation to simulator, it demonstrates AWS-powered tools for global resilience—interactive timeline, real-time GitHub updates, visitor analytics, infrastructure dashboard, secure contact form, and disaster response sim. Free Tier, serverless focus.
+
+## 🏆 Support My AWS Builder Challenge Entry!
+
+**Help me win the AWS Builder Challenge 2025!**
+
+I've poured my heart into building DisasterTech.dev - a humanitarian tech hub that showcases the power of AWS serverless architecture. From interactive timelines to disaster response simulators, every feature demonstrates real-world impact potential.
+
+**[📖 Read My Full Story & Vote Here](https://builder.aws.com/content/31eebSvkBbU2x3IAMKbQeYymygX/building-disastertechdev-aws-powered-humanitarian-hero)**
+
+**Why Vote?**
+
+- 🚀 **7-Day Innovation Sprint**: Built from scratch in just one week
+- 🌍 **Humanitarian Focus**: Technology for global resilience and disaster response
+- 💡 **Educational Value**: Complete AWS serverless architecture walkthrough
+- 🎯 **Real Impact**: Free Tier solution accessible to all developers
+- 📊 **100% Lighthouse Score**: Optimized for performance and accessibility
+
+**Your vote helps amplify humanitarian tech innovation!** ⭐
+
+---
 
 ## Key Features
 
