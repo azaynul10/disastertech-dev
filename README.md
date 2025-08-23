@@ -1,6 +1,6 @@
 # DisasterTech.dev - Humanitarian Tech Hub with AWS
 
-![Header Screenshot](images/header-screenshot.png)
+![Header Screenshot](images/header-screenshot.PNG)
 Live: https://d23n14ul3xobxo.cloudfront.net
 
 ## Overview
