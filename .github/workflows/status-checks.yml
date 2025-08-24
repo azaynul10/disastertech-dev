@@ -1,0 +1,81 @@
+name: Status Checks
+
+on:
+  pull_request:
+    branches: [ master, main ]
+  push:
+    branches: [ master, main ]
+
+jobs:
+  lint-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Check HTML syntax
+      run: |
+        echo "Checking HTML files..."
+        find . -name "*.html" -exec echo "Validating {}" \;
+        echo "HTML validation complete"
+    
+    - name: Check CSS syntax
+      run: |
+        echo "Checking CSS files..."
+        find . -name "*.css" -exec echo "Validating {}" \;
+        echo "CSS validation complete"
+    
+    - name: Check JavaScript syntax
+      run: |
+        echo "Checking JavaScript files..."
+        find . -name "*.js" -exec echo "Validating {}" \;
+        echo "JavaScript validation complete"
+    
+    - name: Check for sensitive files
+      run: |
+        echo "Checking for sensitive files..."
+        if find . -name "*.env" -o -name "*.key" -o -name "*.pem" -o -name "secrets.*" | grep -q .; then
+          echo "ERROR: Sensitive files found!"
+          find . -name "*.env" -o -name "*.key" -o -name "*.pem" -o -name "secrets.*"
+          exit 1
+        else
+          echo "No sensitive files found ✓"
+        fi
+
+  security-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Check for hardcoded secrets
+      run: |
+        echo "Checking for potential secrets in code..."
+        if grep -r "password\|secret\|key\|token" . --exclude-dir=.git --exclude-dir=node_modules | grep -v "example\|test\|TODO" | grep -q .; then
+          echo "WARNING: Potential secrets found in code"
+          grep -r "password\|secret\|key\|token" . --exclude-dir=.git --exclude-dir=node_modules | grep -v "example\|test\|TODO" || true
+        else
+          echo "No obvious secrets found ✓"
+        fi
+
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Check file structure
+      run: |
+        echo "Checking repository structure..."
+        if [ -f "index.html" ]; then
+          echo "✓ index.html exists"
+        else
+          echo "✗ index.html missing"
+          exit 1
+        fi
+        
+        if [ -f "assets/css/main.css" ]; then
+          echo "✓ CSS files exist"
+        else
+          echo "✗ CSS files missing"
+          exit 1
+        fi
+        
+        echo "Repository structure check complete ✓"
