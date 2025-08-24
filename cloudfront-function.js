@@ -2,10 +2,10 @@ function handler(event) {
   var request = event.request;
   var response = event.response;
 
-  // Add security headers
+  // Add security headers with comprehensive CSP for 2025 best practices
   response.headers["content-security-policy"] = {
     value:
-      "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://9l5b7yhwsk.execute-api.us-east-1.amazonaws.com;",
+      "default-src 'self'; script-src 'self' 'unsafe-inline' 'blob:' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: blob:; connect-src 'self' https://9l5b7yhwsk.execute-api.us-east-1.amazonaws.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';",
   };
 
   response.headers["strict-transport-security"] = {

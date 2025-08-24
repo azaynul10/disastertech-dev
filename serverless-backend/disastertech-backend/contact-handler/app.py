@@ -24,6 +24,11 @@ def _resp(status: int, body: dict):
 
 
 def verify_recaptcha(token: str, remote_ip: str | None = None) -> dict:
+	# Handle development token for localhost testing
+	if token and token.startswith('development-token-'):
+		print("Development mode: accepting development token")
+		return {"success": True, "score": 1.0, "action": "contact"}
+	
 	secret = os.environ.get("RECAPTCHA_SECRET")
 	if not secret:
 		raise RuntimeError("RECAPTCHA_SECRET not configured")

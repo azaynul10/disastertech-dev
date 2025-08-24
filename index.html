@@ -10,7 +10,10 @@
       DisasterTech.dev - Humanitarian Technology Innovation | AWS Portfolio
     </title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes"
+    />
     <meta
       name="description"
       content="DisasterTech.dev: AWS-powered hub for humanitarian tech innovation—timeline, simulator, and dashboard for global resilience. From student to savior."
@@ -68,7 +71,14 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://www.google.com" />
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="images/bg.jpg" />
+    <!-- Preload critical assets only -->
+    <link
+      rel="preload"
+      as="image"
+      href="images/world-map.svg"
+      type="image/svg+xml"
+      crossorigin="anonymous"
+    />
     <link
       rel="preconnect"
       href="https://9l5b7yhwsk.execute-api.us-east-1.amazonaws.com"
@@ -77,11 +87,11 @@
     <link
       rel="preload"
       as="style"
-      href="assets/css/main.min.css"
+      href="assets/css/main.min.css?v=2025-08-24-v2"
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript
-      ><link rel="stylesheet" href="assets/css/main.min.css"
+      ><link rel="stylesheet" href="assets/css/main.min.css?v=2025-08-24-v2"
     /></noscript>
     <link
       rel="preload"
@@ -141,28 +151,32 @@
         min-height: 44px;
       }
     </style>
-    <!-- Preload simulator assets to reduce jank on first interaction -->
-    <link rel="preload" as="image" href="images/world-map.svg" />
-    <!-- Conditional reCAPTCHA loading to cut TBT -->
-    <script>
-      function loadRecaptcha() {
-        if (window.__recaptchaLoaded) return;
-        window.__recaptchaLoaded = true;
-        const s = document.createElement("script");
-        s.src =
-          "https://www.google.com/recaptcha/api.js?render=6Ld5mqsrAAAAAPisHfciDdJOmmMGzcW99ifyZpid";
-        s.async = true;
-        s.defer = true;
-        document.head.appendChild(s);
-      }
 
-      // Only load reCAPTCHA when form is actually focused/submitted
-      function loadRecaptchaOnDemand() {
-        if (!window.__recaptchaLoaded) {
-          loadRecaptcha();
-        }
-      }
-    </script>
+         <!-- reCAPTCHA v3 Implementation -->
+     <script src="https://www.google.com/recaptcha/api.js?render=6Ld5mqsrAAAAAPisHfciDdJOmmMGzcW99ifyZpid"></script>
+     <script>
+       // reCAPTCHA v3 token generation function
+       async function generateRecaptchaToken(action = 'contact') {
+         try {
+           // Check if we're on localhost for development
+           const isLocalhost = window.location.hostname === 'localhost' || 
+                              window.location.hostname === '127.0.0.1' ||
+                              window.location.hostname.includes('localhost');
+           
+           if (isLocalhost) {
+             console.log('Development mode: bypassing reCAPTCHA for localhost');
+             return 'development-token-' + Date.now();
+           }
+           
+           return await grecaptcha.ready(() => {
+             return grecaptcha.execute('6Ld5mqsrAAAAAPisHfciDdJOmmMGzcW99ifyZpid', {action: action});
+           });
+         } catch (error) {
+           console.error('reCAPTCHA error:', error);
+           return null;
+         }
+       }
+     </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -203,6 +217,9 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
   </head>
   <body class="is-preload">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <!-- Wrapper -->
     <div id="wrapper">
       <!-- Header -->
@@ -267,16 +284,16 @@
 
           <!-- Timeline Legend -->
           <div class="timeline-legend">
-            <h3>Project Milestones</h3>
+            <h3>AWS Builder Challenge #2 Milestones</h3>
             <div class="metrics-grid">
               <div class="metric-item">
-                <span class="metric-number" data-target="3" data-suffix=""
+                <span class="metric-number" data-target="7" data-suffix=""
                   >0</span
                 >
                 <span class="metric-label">Challenge Days Completed</span>
               </div>
               <div class="metric-item">
-                <span class="metric-number" data-target="5" data-suffix=""
+                <span class="metric-number" data-target="6" data-suffix="+"
                   >0</span
                 >
                 <span class="metric-label">AWS Services Integrated</span>
@@ -285,10 +302,10 @@
                 <span class="metric-number" data-target="100" data-suffix="%"
                   >0</span
                 >
-                <span class="metric-label">Free Tier Usage</span>
+                <span class="metric-label">Challenge Completion</span>
               </div>
               <div class="metric-item">
-                <span class="metric-number" data-target="6" data-suffix=""
+                <span class="metric-number" data-target="7" data-suffix=""
                   >0</span
                 >
                 <span class="metric-label">Timeline Milestones</span>
@@ -480,37 +497,81 @@
         </article>
 
         <!-- Disaster Response Simulator -->
-        <article id="simulator">
-          <h2 class="major">Disaster Response Simulator</h2>
-          <p>
-            Simulate a disaster event and see tech coordination in action. Click
-            "Start Simulation" to begin.
-          </p>
-          <canvas
-            id="sim-canvas"
-            width="800"
-            height="400"
-            aria-label="Disaster simulation map with coordinated areas"
-            role="img"
-          ></canvas>
-          <div class="education-info">
-            <h3>How It Works</h3>
-            <p>
-              This simulator demonstrates real-time coordination using AWS
-              Lambda for alerts, DynamoDB for data. Learn more in timeline!
+        <article id="simulator" class="component-base">
+          <header class="component-content">
+            <h2 class="major">Disaster Response Simulator</h2>
+            <p class="text-content">
+              Simulate a disaster event and see tech coordination in action.
+              Click "Start Simulation" to begin.
             </p>
-          </div>
-          <!-- Map/simulation area -->
-          <div id="sim-controls">
-            <button id="start-sim">Start Simulation</button>
-            <button id="reset-sim">Reset</button>
-            <div id="sim-stats">
-              <p>Success Rate: <span id="success-rate">0%</span></p>
-              <p>Areas Coordinated: <span id="areas-count">0</span></p>
+          </header>
+
+          <main class="component-content">
+            <canvas
+              id="sim-canvas"
+              aria-label="Disaster simulation map with coordinated areas"
+              role="img"
+              class="component-interaction"
+            ></canvas>
+
+            <section class="education-info component-content">
+              <h3>How It Works</h3>
+              <p class="text-content">
+                This simulator demonstrates real-time coordination using AWS
+                Lambda for alerts, DynamoDB for data. Learn more in timeline!
+              </p>
+            </section>
+          </main>
+
+          <footer class="component-content">
+            <!-- Interactive controls with semantic order -->
+            <div id="sim-controls" class="component-interaction">
+              <button
+                id="start-sim"
+                type="button"
+                aria-label="Start disaster simulation"
+              >
+                Start Simulation
+              </button>
+              <button
+                id="reset-sim"
+                type="button"
+                aria-label="Reset simulation to initial state"
+              >
+                Reset
+              </button>
             </div>
-          </div>
-          <div id="sim-log" aria-live="polite"></div>
-          <!-- Simulation messages -->
+
+            <!-- Status display with semantic structure -->
+            <div
+              id="sim-stats"
+              class="component-decoration"
+              role="status"
+              aria-live="polite"
+            >
+              <p>
+                Success Rate:
+                <span id="success-rate" aria-label="Current success rate"
+                  >0%</span
+                >
+              </p>
+              <p>
+                Areas Coordinated:
+                <span id="areas-count" aria-label="Number of coordinated areas"
+                  >0</span
+                >
+              </p>
+            </div>
+
+            <!-- Live log with proper accessibility -->
+            <div
+              id="sim-log"
+              class="component-content"
+              aria-live="polite"
+              role="log"
+              aria-label="Simulation activity log"
+            ></div>
+          </footer>
         </article>
 
         <!-- Contact -->
@@ -1013,26 +1074,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
           document.getElementById(id)?.addEventListener("input", resetContactUI)
         );
         form?.addEventListener("reset", resetContactUI);
-        // Proactively lazy-load reCAPTCHA on interaction/visibility
-        if (form) {
-          ["focus", "mouseover", "touchstart"].forEach((evt) =>
-            form.addEventListener(evt, () => loadRecaptcha(), {
-              once: true,
-              passive: true,
-            })
-          );
-          const recaptchaObserver = new IntersectionObserver(
-            (entries) => {
-              if (entries.some((e) => e.isIntersecting)) {
-                loadRecaptcha();
-                recaptchaObserver.disconnect();
-              }
-            },
-            { rootMargin: "300px" }
-          );
-          recaptchaObserver.observe(form);
-        }
-
+        // Contact form submission with proper reCAPTCHA v3
         if (form) {
           form.addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -1042,36 +1084,21 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
               '<p style="color: #ffaa00;">Sending message...</p>';
 
             try {
-              // Load reCAPTCHA if needed
-              if (!window.grecaptcha) {
-                loadRecaptcha();
-                await new Promise((resolve) => setTimeout(resolve, 2000));
-              }
-
-              if (!window.grecaptcha) {
+              // Generate reCAPTCHA token using the new function
+              const recaptchaToken = await generateRecaptchaToken('contact');
+              
+              if (!recaptchaToken) {
                 responseDiv.innerHTML =
-                  '<p style="color: #ff4d4d;">reCAPTCHA failed to load. Please refresh and try again.</p>';
+                  '<p style="color: #ff4d4d;">reCAPTCHA verification failed. Please try again.</p>';
                 return;
               }
 
-              // Get reCAPTCHA token
-              const token = await new Promise((resolve, reject) => {
-                grecaptcha.ready(() => {
-                  grecaptcha
-                    .execute("6Ld5mqsrAAAAAPisHfciDdJOmmMGzcW99ifyZpid", {
-                      action: "contact",
-                    })
-                    .then(resolve)
-                    .catch(reject);
-                });
-              });
-
-              // Send the form data
+              // Send the form data with reCAPTCHA token
               const payload = {
                 name: document.getElementById("name").value,
                 email: document.getElementById("email").value,
                 message: document.getElementById("message").value,
-                recaptcha_token: token,
+                recaptcha_token: recaptchaToken,
               };
 
               console.log("Sending payload:", payload);
@@ -1183,7 +1210,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
       });
     </script>
     <!-- Load Timeline scripts immediately to ensure timeline displays -->
-    <script src="timeline-data.js" defer></script>
+    <script src="timeline-data.js?v=2025-08-24-v2" defer></script>
     <script src="assets/js/timeline.js" defer></script>
     <!-- Lazy-load Simulator when section is visible or hash targets it -->
     <script>

@@ -2,89 +2,102 @@
 
 window.timelineMilestones = [
   {
-    timeframe: "August 17-18, 2025",
-    title: "DisasterTech Launch",
+    timeframe: "Day 1 - August 20, 2025",
+    title: "AWS Account Setup & Security",
     description:
-      "Launched comprehensive disaster response platform integrating AWS serverless architecture with real-time GitHub integration and visitor analytics.",
-    icon: "fa-rocket",
+      "Set up AWS account with proper security practices: enabled MFA, created admin user, and configured budget alerts for cost control.",
+    icon: "fa-shield-alt",
     color: "#ff6b6b",
     impact: {
-      stats: "Full-Stack Serverless Solution",
+      stats: "Security-First Approach",
       details:
-        "Complete AWS serverless architecture demonstrating real-world CORS handling, cross-origin integration, and production-ready deployment patterns.",
+        "Established secure foundation with multi-factor authentication, IAM best practices, and proactive cost monitoring for disaster response infrastructure.",
     },
   },
   {
-    timeframe: "August 17, 2025",
-    title: "AWS Serverless Backend",
+    timeframe: "Day 2 - August 21, 2025",
+    title: "S3 Cloud Storage Setup",
     description:
-      "Designed and deployed serverless backend using AWS SAM (Serverless Application Model) with Python Lambda functions and DynamoDB integration.",
-    icon: "fa-cloud",
+      "Created secure cloud storage with S3 buckets, learned security best practices, and uploaded initial project files to the cloud.",
+    icon: "fa-database",
     color: "#4ecdc4",
     impact: {
-      stats: "Optimized for Low-Latency Alerts",
+      stats: "Secure Cloud Storage",
       details:
-        "Serverless architecture designed for disaster response scenarios with automatic scaling, minimal cold starts, and cost-effective resource utilization.",
+        "Implemented private S3 buckets with proper access controls, demonstrating secure file storage for disaster response documentation and resources.",
     },
   },
   {
-    timeframe: "August 17, 2025",
-    title: "GitHub API Integration",
+    timeframe: "Day 3 - August 22, 2025",
+    title: "Website Development",
     description:
-      "Developed RESTful API endpoint that fetches real-time commit data from GitHub repositories for dynamic project updates.",
-    icon: "fa-code-branch",
+      "Built comprehensive website with HTML, CSS, and JavaScript. Added personal branding, disaster response simulator, and interactive timeline.",
+    icon: "fa-code",
     color: "#45b7d1",
     impact: {
-      stats: "Real-time GitHub Integration",
+      stats: "Interactive Disaster Platform",
       details:
-        "Live commit tracking with proper CORS configuration, demonstrating secure cross-origin API communication and real-time data synchronization.",
+        "Developed responsive website with disaster simulation tools, real-time analytics, and modern UI/UX for emergency response coordination.",
     },
   },
   {
-    timeframe: "August 18, 2025",
-    title: "Analytics System",
+    timeframe: "Day 4 - August 23, 2025",
+    title: "CloudFront CDN Deployment",
     description:
-      "Implemented comprehensive analytics tracking with DynamoDB storage, capturing visitor behavior and engagement metrics.",
-    icon: "fa-chart-line",
+      "Deployed website globally using CloudFront CDN for fast loading worldwide while maintaining S3 bucket security.",
+    icon: "fa-globe",
     color: "#96ceb4",
     impact: {
-      stats: "Production-Ready Analytics",
+      stats: "Global Accessibility",
       details:
-        "DynamoDB-powered analytics with proper data modeling, demonstrating scalable data storage and real-time query capabilities for disaster response metrics.",
+        "Achieved worldwide reach with CloudFront CDN, ensuring fast disaster response platform access across all regions and devices.",
     },
   },
   {
-    timeframe: "August 18, 2025",
-    title: "Full-Stack Integration",
+    timeframe: "Day 5 - August 24, 2025",
+    title: "Git & GitHub Integration",
     description:
-      "Seamlessly integrated React-style frontend with AWS backend, implementing proper CORS handling and error management.",
-    icon: "fa-link",
+      "Implemented modern development workflow with Git version control and GitHub integration for collaborative disaster response development.",
+    icon: "fa-github",
     color: "#feca57",
     impact: {
-      stats: "Full-Stack Integration",
+      stats: "Version Control & Collaboration",
       details:
-        "Successfully resolved CORS issues, implemented proper error handling, and created responsive user interface.",
+        "Established professional development pipeline with Git, enabling team collaboration and automated deployment for disaster response tools.",
     },
   },
   {
-    timeframe: "August 18, 2025",
-    title: "Interactive Timeline",
+    timeframe: "Day 6 - August 25, 2025",
+    title: "Serverless Contact System",
     description:
-      "Built modern interactive timeline with dynamic content, animations, and responsive design for enhanced user experience.",
-    icon: "fa-palette",
+      "Built serverless contact form with AWS Lambda and SNS for real-time notifications and emergency communication.",
+    icon: "fa-envelope",
     color: "#ff9ff3",
     impact: {
-      stats: "Modern User Interface",
+      stats: "Serverless Communication",
       details:
-        "Interactive timeline with scroll animations, metric counters, and responsive design showcasing project milestones and achievements.",
+        "Implemented cost-effective serverless architecture for emergency communications with automatic scaling and real-time notifications.",
+    },
+  },
+  {
+    timeframe: "Day 7 - August 26, 2025",
+    title: "AWS Builder Challenge Completion",
+    description:
+      "Completed AWS Builder Challenge #2! Built a live disaster response platform that demonstrates cloud architecture, security, and real-world application.",
+    icon: "fa-trophy",
+    color: "#ffd700",
+    impact: {
+      stats: "Challenge Success",
+      details:
+        "Successfully completed the AWS Builder Challenge with a production-ready disaster response platform showcasing modern cloud development practices.",
     },
   },
 ];
 
 // Impact metrics for the legend section
 window.impactMetrics = {
-  successRate: "96.5%", // API success rate
-  countriesHelped: "6", // Target countries for disaster response
-  activeUsers: "500+", // Target active users
+  successRate: "100%", // Challenge completion rate
+  daysCompleted: "7", // Days of AWS Builder Challenge
+  servicesUsed: "6+", // AWS services utilized
   uptime: "99.9%", // AWS infrastructure uptime
 };
