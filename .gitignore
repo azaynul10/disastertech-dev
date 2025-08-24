@@ -42,3 +42,17 @@ coverage/
 # Ignore other common files
 *.bak
 *.swp
+
+# Ignore AWS Builder Challenge blog and sensitive documentation
+AWS_BUILDER_CHALLENGE_BLOG.md
+temp-*.html
+temp-*.js
+
+# Ignore AWS credentials and configuration
+.aws/
+aws-credentials.json
+aws-config.json
+
+# Ignore reCAPTCHA secrets
+recaptcha-secret.txt
+recaptcha-config.json
