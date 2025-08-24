@@ -255,6 +255,12 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .timeline-container {
+    margin: 2rem auto;
+    padding: 2rem 0;
+    min-height: 500px;
+  }
+
   .timeline-line {
     left: 20px;
     transform: none;
@@ -264,6 +270,7 @@
     margin-left: 60px;
     margin-right: 1rem;
     padding: 1.5rem;
+    border-radius: 12px;
   }
 
   .timeline-icon {
@@ -274,15 +281,22 @@
   .timeline-title {
     font-size: 1.1rem;
     line-height: 1.3;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .timeline-description {
     font-size: 0.9rem;
     line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .timeline-date {
     font-size: 0.8rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .metrics-grid {
@@ -297,37 +311,169 @@
   .metric-number {
     font-size: 2.5rem;
   }
+
+  .timeline-legend h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .metrics-grid {
-    grid-template-columns: 1fr;
+  .timeline-container {
+    margin: 1.5rem auto;
+    padding: 1.5rem 0;
+    min-height: 400px;
+  }
+
+  .timeline-line {
+    left: 15px;
+    width: 3px;
   }
 
   .timeline-content {
-    margin-left: 50px;
+    margin-left: 45px;
     margin-right: 0.5rem;
     padding: 1.2rem;
+    border-radius: 10px;
+  }
+
+  .timeline-icon {
+    left: 15px;
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    top: -15px;
   }
 
   .timeline-title {
     font-size: 1rem;
     line-height: 1.2;
+    margin: 0.3rem 0;
   }
 
   .timeline-description {
     font-size: 0.85rem;
     line-height: 1.4;
+    margin-bottom: 0.8rem;
   }
 
   .timeline-date {
     font-size: 0.75rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .metric-item {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .metric-number {
+    font-size: 2rem;
+  }
+
+  .metric-label {
+    font-size: 0.8rem;
+  }
+
+  .timeline-legend h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 375px) {
+  .timeline-container {
+    margin: 1rem auto;
+    padding: 1rem 0;
+  }
+
+  .timeline-line {
+    left: 12px;
+    width: 2px;
+  }
+
+  .timeline-content {
+    margin-left: 40px;
+    margin-right: 0.3rem;
+    padding: 1rem;
   }
 
   .timeline-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
+    left: 12px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.9rem;
+    top: -12px;
+  }
+
+  .timeline-title {
+    font-size: 0.95rem;
+    line-height: 1.1;
+  }
+
+  .timeline-description {
+    font-size: 0.8rem;
+    line-height: 1.3;
+  }
+
+  .timeline-date {
+    font-size: 0.7rem;
+  }
+
+  .metric-number {
+    font-size: 1.8rem;
+  }
+
+  .metric-label {
+    font-size: 0.75rem;
+  }
+
+  .timeline-legend h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .timeline-content {
+    margin-left: 35px;
+    margin-right: 0.2rem;
+    padding: 0.8rem;
+  }
+
+  .timeline-icon {
+    left: 10px;
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+    top: -10px;
+  }
+
+  .timeline-title {
+    font-size: 0.9rem;
+    line-height: 1.1;
+  }
+
+  .timeline-description {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .timeline-date {
+    font-size: 0.65rem;
+  }
+
+  .metric-number {
+    font-size: 1.6rem;
+  }
+
+  .metric-label {
+    font-size: 0.7rem;
   }
 }
 
